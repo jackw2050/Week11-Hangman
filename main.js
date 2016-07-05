@@ -14,41 +14,36 @@ var wordToGuess;
 // console.log("Welcome to Hangman!\nYour word has been generated.");
 
 function Game() {
-    console.log(JSON.stringify(wordToGuess, null, 2));
-    if (wordToGuess.guessCounter < wordToGuess.mistakesAllowed && wordToGuess.wordComplete == false) {
+    //    console.log(JSON.stringify(wordToGuess, null, 2));
+
+    if (wordToGuess.guessCounter > 0 && wordToGuess.wordComplete == false) {
         inquirer.prompt([{
             name: "guess",
             message: "Letter?"
         }]).then(function(letter) {
 
-        
-var myLetter = letter.guess.toLowerCase();
 
-//console.log(JSON.stringify(wordToGuess, null, 2));
-wordToGuess.currentLetterGuess = myLetter;
+            var myLetter = letter.guess.toLowerCase();
 
-//console.log(JSON.stringify(wordToGuess.currentLetterGuess, null, 2));
+            //console.log(JSON.stringify(wordToGuess, null, 2));
+            wordToGuess.currentLetterGuess = myLetter;
 
+            wordToGuess = word.CheckArrayForLetter(wordToGuess); 				// check if letter submitted is present - advise user
+            letters.setScreenArray(wordToGuess); 								// set screen results with updated letter info
+            console.log(wordToGuess.screenArray.toString().replace(/,/g, " ")); // print new word array to screen
+//			console.log("checking for success");
+			wordToGuess = word.CheckForSuccess(wordToGuess);					// check for success or failure
 
-//console.log("set to lower case");
-            wordToGuess = word.CheckArrayForLetter(wordToGuess);
-//console.log("ready to set letter");
+            
 
-
-            letters.setScreenArray(wordToGuess);
-console.log("letter set");
-            console.log(wordToGuess.screenArray.toString().replace(/,/g, " "));
-            console.log("Letters remaining " + wordToGuess.alphabet.toString().replace(/,/g, " "));
-
-
-
+            console.log("--------------------------------------------------------------------------------");
 
             // console.log(JSON.stringify(wordToGuess.locationArray, null, 2));
-            wordToGuess.guessCounter++;
-            // PlayGame();
+            Game();
         })
     } else {
-        //  game over
+    	letters.GetResults(wordToGuess);
+        console.log("game over");
     }
 }
 

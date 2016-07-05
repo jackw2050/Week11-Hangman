@@ -6,13 +6,11 @@ exports.CheckRepeatLetterGuess = function(wordObject) {
     if (letter) { // if letter has already been used return  false
         return false;
     } else {
-    	wordObject.lettersUsed.push(wordObject);
+        wordObject.lettersUsed.push(wordObject);
     }
 }
 
 exports.CheckArrayForLetter = function(wordObject) {
-//console.log("creating location array");
-
     for (var arrCtr = 0; arrCtr < wordObject.wordArray.length; arrCtr++) {
         if (wordObject.wordArray[arrCtr] == wordObject.currentLetterGuess) {
             wordObject.locationArray.push(arrCtr);
@@ -26,7 +24,15 @@ function FindIndex(wordObject) {
     return wordObject.lettersUsed == wordObject.currentLetterGuess;
 }
 
-
+exports.CheckForSuccess = function(wordObject) {
+	//console.log("in success function");
+    if (wordObject.screenArray == wordObject.wordArray) {
+        wordObject.wordComplete = true;
+    } else {
+        wordObject.wordComplete = false;
+    }
+    return wordObject;
+}
 
 //exports.CheckArrayForLetter = MakeLetterLocationArray(arrayToCheck, letter);
 

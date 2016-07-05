@@ -33,6 +33,8 @@ function CreateNewWord() {
     var myWord = new GameWord(randomWord());
     myWord.SplitString();
     myWord.makeCompletedArray();
+    myWord.guessCounter = myWord.mistakesAllowed;
+//    console.log(myWord.guessCounter);
     return myWord;
 }
 
