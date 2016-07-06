@@ -1,5 +1,11 @@
 //word.js should contain all of the methods which will check the letters guessed versus the random word selected.
 
+exports.AlphabetArrayUpdate = function(wordObject) {
+    let letterPosition = wordObject.alphabet.indexOf(wordObject.currentLetterGuess.toUpperCase());
+    wordObject.alphabet[letterPosition] = " ";
+    return wordObject;
+}
+
 
 exports.CheckRepeatLetterGuess = function(wordObject) {
     var letterIndex = FindIndex(wordObject);
@@ -25,8 +31,7 @@ function FindIndex(wordObject) {
 }
 
 exports.CheckForSuccess = function(wordObject) {
-	//console.log("in success function");
-    if (wordObject.screenArray == wordObject.wordArray) {
+    if (wordObject.screenArray.indexOf("_") < 0) {
         wordObject.wordComplete = true;
     } else {
         wordObject.wordComplete = false;
@@ -35,33 +40,3 @@ exports.CheckForSuccess = function(wordObject) {
 }
 
 //exports.CheckArrayForLetter = MakeLetterLocationArray(arrayToCheck, letter);
-
-
-
-/*
-function CheckArrayForLetters(arrayToCheck, letter) {
-    console.log("checking letter exists");
-    if (typeof(arrayToCheck == letter) == 'undefined') {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-exports.wCheckArrayForLetter = function(arrayToCheck, letter) {
-    var locationArray = [];
-    console.log("creating location array");
-    if (CheckArrayForLetter(arrayToCheck, letter) == true) {
-
-        for (var arrCtr = 0; arrCtr < arrayToCheck.length; arrCtr++) {
-            if (arrayToCheck[arrCtr] === letter) {
-                locationArray.push(arrCtr);
-            }
-        }
-        return locationArray;
-    } else {
-        return locationArray;
-    }
-
-}
-*/

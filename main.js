@@ -6,12 +6,13 @@ var letters = require('./letters.js');
 var wordToGuess;
 
 
-//console.log(JSON.stringify(wordToGuess, null, 2));
 
 
 
 
-// console.log("Welcome to Hangman!\nYour word has been generated.");
+
+ console.log("Welcome to Hangman!\nYour word has been generated. \n");
+            console.log("--------------------------------------------------------------------------------");
 
 function Game() {
     //    console.log(JSON.stringify(wordToGuess, null, 2));
@@ -21,29 +22,27 @@ function Game() {
             name: "guess",
             message: "Letter?"
         }]).then(function(letter) {
-
-
+           console.log("\n");
             var myLetter = letter.guess.toLowerCase();
-
-            //console.log(JSON.stringify(wordToGuess, null, 2));
             wordToGuess.currentLetterGuess = myLetter;
-
-            wordToGuess = word.CheckArrayForLetter(wordToGuess); 				// check if letter submitted is present - advise user
-            letters.setScreenArray(wordToGuess); 								// set screen results with updated letter info
-            console.log(wordToGuess.screenArray.toString().replace(/,/g, " ")); // print new word array to screen
-//			console.log("checking for success");
+            wordToGuess = word.CheckArrayForLetter(wordToGuess); 					// check if letter submitted is present - advise user
+            letters.setScreenArray(wordToGuess); 									// set screen results with updated letter info
+           	word.AlphabetArrayUpdate(wordToGuess);
+           	let currentWord = wordToGuess.screenArray.toString().replace(/,/g, " ");// 
+           	let currentAlphabet = wordToGuess.alphabet.toString().replace(/,/g, "");
+			console.log(currentWord + "\n\n");
+			console.log("Available letters" + "");
+			console.log(currentAlphabet + "\n\n");
 			wordToGuess = word.CheckForSuccess(wordToGuess);					// check for success or failure
 
-            
-
-            console.log("--------------------------------------------------------------------------------");
+            console.log("--------------------------------------------------------------------------------\n");
 
             // console.log(JSON.stringify(wordToGuess.locationArray, null, 2));
             Game();
         })
     } else {
     	letters.GetResults(wordToGuess);
-        console.log("game over");
+        console.log("Game over");
     }
 }
 
@@ -52,6 +51,7 @@ function Game() {
 
 function StartGame(start, PlayGame) {
     wordToGuess = game.wordToGuess;
+    //console.log(JSON.stringify(wordToGuess, null, 2));
     Game();
 
 
