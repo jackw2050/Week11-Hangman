@@ -27,8 +27,9 @@ function ReplaceLetters(wordObject) {
     wordObject.locationArray = [];
     return wordObject;
 }
-exports.GetResults = function(wordToGuess) {
-        if (wordToGuess.wordComplete == true) {
+exports.GetResults = function(wordToGuess, completeLoc) {
+       // if (wordToGuess.wordComplete == true) {
+        if (wordToGuess[completeLoc] == true) {
             console.log("Good work.  You win!");
         } else {
             console.log("Sorry.  You loose.  The word is " + wordToGuess.word);

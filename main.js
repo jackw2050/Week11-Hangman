@@ -23,9 +23,10 @@ function Game() {
             message: "Letter?"
         }]).then(function(letter) {
            console.log("\n");
-            var myLetter = letter.guess.toLowerCase();
-            wordToGuess.currentLetterGuess = myLetter;
-            wordToGuess = word.CheckArrayForLetter(wordToGuess); 					// check if letter submitted is present - advise user
+          //  var myLetter = letter.guess.toLowerCase();
+            wordToGuess.currentLetterGuess = letter.guess.toLowerCase(); //myLetter;
+
+            wordToGuess = word.CheckArrayForLetter(wordToGuess, wordToGuess.currentLetterGuess); 					// check if letter submitted is present - advise user
             letters.setScreenArray(wordToGuess); 									// set screen results with updated letter info
            	word.AlphabetArrayUpdate(wordToGuess);
            	let currentWord = wordToGuess.screenArray.toString().replace(/,/g, " ");// 
@@ -41,7 +42,7 @@ function Game() {
             Game();
         })
     } else {
-    	letters.GetResults(wordToGuess);
+    	letters.GetResults(wordToGuess, wordToGuess.wordComplete);
         console.log("Game over");
     }
 }
